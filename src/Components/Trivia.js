@@ -27,6 +27,11 @@ function Trivia(props) {
     }, [])
     const checkAnswer = (answer) => {
         setIsCorrect(answer === trivia.correct_answer)
+        if (answer === trivia.correct_answer) {
+            props.onAnswer(100)
+        } else {
+            props.onAnswer(-25)
+        }
     }
     if (isLoading) {
         return (
