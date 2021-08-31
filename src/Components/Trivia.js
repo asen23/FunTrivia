@@ -33,6 +33,25 @@ function Trivia(props) {
             props.onAnswer(-25)
         }
     }
+    const ButtonList = () => {
+        return (
+            <>
+                <Button
+                    name="Play Again"
+                    onClick={() => {
+                        setIsCorrect(undefined)
+                        getTrivia()
+                    }}
+                />
+                <Button
+                    name="Exit"
+                    onClick={() => {
+                        props.exit()
+                    }}
+                />
+            </>
+        )
+    }
     if (isLoading) {
         return (
             <img
@@ -64,19 +83,7 @@ function Trivia(props) {
                 ) : isCorrect === true ? (
                     <div>
                         <h1 className="green">Correct</h1>
-                        <Button
-                            name="Play Again"
-                            onClick={() => {
-                                setIsCorrect(undefined)
-                                getTrivia()
-                            }}
-                        />
-                        <Button
-                            name="Exit"
-                            onClick={() => {
-                                props.exit()
-                            }}
-                        />
+                        <ButtonList />
                     </div>
                 ) : (
                     <div>
@@ -88,19 +95,7 @@ function Trivia(props) {
                                     trivia.correct_answer,
                             }}
                         ></h2>
-                        <Button
-                            name="Play Again"
-                            onClick={() => {
-                                setIsCorrect(undefined)
-                                getTrivia()
-                            }}
-                        />
-                        <Button
-                            name="Exit"
-                            onClick={() => {
-                                props.exit()
-                            }}
-                        />
+                        <ButtonList />
                     </div>
                 )}
             </div>
