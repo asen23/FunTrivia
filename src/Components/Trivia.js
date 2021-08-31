@@ -40,16 +40,20 @@ function Trivia(props) {
             <div className="w-75">
                 <p className="ma1 f4">Category: {trivia.category}</p>
                 <p className="ma1 f4">Difficulty: {trivia.difficulty}</p>
-                <p className="ma1 f2">{trivia.question}</p>
+                <p
+                    className="ma1 f2"
+                    dangerouslySetInnerHTML={{ __html: trivia.question }}
+                ></p>
                 {isCorrect === undefined ? (
                     <div className="flex flex-wrap">
                         {answers.map((answer) => (
                             <button
                                 className="w-50 pa3 f3"
                                 onClick={() => checkAnswer(answer)}
-                            >
-                                {answer}
-                            </button>
+                                dangerouslySetInnerHTML={{
+                                    __html: answer,
+                                }}
+                            ></button>
                         ))}
                     </div>
                 ) : isCorrect === true ? (
@@ -72,7 +76,13 @@ function Trivia(props) {
                 ) : (
                     <div>
                         <h1 className="red">Wrong</h1>
-                        <h2>The correct answer is {trivia.correct_answer}</h2>
+                        <h2
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    "The correct answer is " +
+                                    trivia.correct_answer,
+                            }}
+                        ></h2>
                         <Button
                             name="Play Again"
                             onClick={() => {
