@@ -1,15 +1,12 @@
 import React from "react"
+import Button from "./Components/Button"
 
 function App() {
     return (
         <div className="flex flex-column items-center justify-center vh-100 bg-lightest-blue">
             <h1 className="f1">Fun Trivia</h1>
-            <button className="bg-blue b--light-blue br3 f2 pa2 ma2 grow">
-                Play
-            </button>
-            <button className="bg-blue b--light-blue br3 f2 pa2 ma2 grow">
-                Score
-            </button>
+            <Button name="Play" />
+            <Button name="Score" />
         </div>
     )
 }
