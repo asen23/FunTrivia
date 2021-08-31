@@ -25,7 +25,6 @@ function App() {
                         setIsPlaying(false)
                     }}
                     onAnswer={(point) => {
-                        setScore(score + point)
                         if (score + point > highscore) {
                             setHighscore(score + point)
                             localStorage.setItem(
@@ -33,6 +32,7 @@ function App() {
                                 (score + point).toString()
                             )
                         }
+                        setScore(score + point)
                     }}
                 />
             ) : (
