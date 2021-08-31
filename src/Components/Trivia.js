@@ -6,9 +6,13 @@ function Trivia(props) {
     const [trivia, setTrivia] = useState({})
     const [answers, setAnswers] = useState([])
     const [isCorrect, setIsCorrect] = useState(undefined)
+    const [retry, setRetry] = useState(0)
+    const [isError, setIsError] = useState(false)
     const getTrivia = () => {
         setIsLoading(true)
-        fetch("https://opentdb.com/api.php?amount=1&type=multiple")
+        fetch("https://opentdb.com/api.php?amount=1&type=multiple", {
+            mode: "cors",
+        })
             .then((response) => {
                 return response.json()
             })
@@ -19,6 +23,14 @@ function Trivia(props) {
                 allAnswer.sort(() => 0.5 - Math.random())
                 setAnswers(allAnswer)
                 setIsLoading(false)
+            })
+            .catch((error) => {
+                if (retry < 3) {
+                    setRetry(retry + 1)
+                    getTrivia()
+                } else {
+                    setIsError(true)
+                }
             })
     }
     useEffect(() => {
@@ -58,6 +70,13 @@ function Trivia(props) {
                 src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif"
                 alt="loading"
             />
+        )
+    } else if (isError) {
+        return (
+            <div className="w-75">
+                <h1>An error has occurred</h1>
+                <ButtonList />
+            </div>
         )
     } else {
         return (
