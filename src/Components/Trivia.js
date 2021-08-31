@@ -94,6 +94,7 @@ function Trivia(props) {
                             <button
                                 className="w-50 pa3 f3"
                                 onClick={() => checkAnswer(answer)}
+                                key={answer}
                                 dangerouslySetInnerHTML={{
                                     __html: answer,
                                 }}
