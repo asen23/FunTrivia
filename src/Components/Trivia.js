@@ -17,6 +17,7 @@ function Trivia(props) {
                 return response.json()
             })
             .then((response) => {
+                setRetry(0)
                 setTrivia(response.results[0])
                 let allAnswer = response.results[0].incorrect_answers
                 allAnswer.push(response.results[0].correct_answer)
