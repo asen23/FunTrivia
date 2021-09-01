@@ -24,7 +24,7 @@ function App() {
         if (lastScore != null) {
             setHasOldScore(true)
         }
-        let lastSetting = sessionStorage.getItem("setting")
+        let lastSetting = localStorage.getItem("setting")
         if (lastSetting != null) {
             setSetting(JSON.parse(lastSetting))
         }
