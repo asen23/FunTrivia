@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import Button from "./Button"
 
 function Trivia(props) {
@@ -8,7 +8,7 @@ function Trivia(props) {
     const [isCorrect, setIsCorrect] = useState(undefined)
     const [retry, setRetry] = useState(0)
     const [isError, setIsError] = useState(false)
-    const getTrivia = () => {
+    const getTrivia = useCallback(() => {
         setIsLoading(true)
         fetch("https://opentdb.com/api.php?amount=1&type=multiple", {
             mode: "cors",
@@ -33,11 +33,10 @@ function Trivia(props) {
                     setIsError(true)
                 }
             })
-    }
+    }, [retry])
     useEffect(() => {
         getTrivia()
-        // eslint-disable-next-line
-    }, [])
+    }, [getTrivia])
     const checkAnswer = (answer) => {
         setIsCorrect(answer === trivia.correct_answer)
         if (answer === trivia.correct_answer) {
