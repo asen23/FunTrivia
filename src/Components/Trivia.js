@@ -38,10 +38,20 @@ function Trivia(props) {
     }, [getTrivia])
     const checkAnswer = (answer) => {
         setIsCorrect(answer === trivia.correct_answer)
+        let correctScores = {
+            easy: 25,
+            medium: 50,
+            hard: 100,
+        }
+        let incorrectScores = {
+            easy: 0,
+            medium: -10,
+            hard: -25,
+        }
         if (answer === trivia.correct_answer) {
-            props.onAnswer(100)
+            props.onAnswer(correctScores[trivia.difficulty])
         } else {
-            props.onAnswer(-25)
+            props.onAnswer(incorrectScores[trivia.difficulty])
         }
     }
     const ButtonList = () => {
