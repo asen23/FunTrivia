@@ -23,9 +23,10 @@ const Setting = (props) => {
     }, [props.setting.category, props.setting.difficulty, props.setting.type])
 
     return (
-        <div>
+        <div className="flex flex-column w-40 f3">
             <label htmlFor="type">Type:</label>
             <select
+                className="mv2"
                 name="type"
                 id="type"
                 value={type}
@@ -39,6 +40,7 @@ const Setting = (props) => {
             </select>
             <label htmlFor="difficulty">Difficulty:</label>
             <select
+                className="mv2"
                 name="difficulty"
                 id="difficulty"
                 value={difficulty}
@@ -53,6 +55,7 @@ const Setting = (props) => {
             </select>
             <label htmlFor="category">Category:</label>
             <select
+                className="mv2"
                 name="category"
                 id="category"
                 value={category}
