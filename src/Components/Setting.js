@@ -22,54 +22,69 @@ const Setting = (props) => {
         setCategory(props.setting.category)
     }, [props.setting.category, props.setting.difficulty, props.setting.type])
 
+    const SelectForm = (props) => {
+        return (
+            <>
+                <label htmlFor={props.id}>{props.label}</label>
+                <select
+                    className="mv2"
+                    name={props.id}
+                    id={props.id}
+                    value={props.value}
+                    onChange={(event) => {
+                        props.onChange(event.target.value)
+                    }}
+                >
+                    {props.options.map(([value, name]) => (
+                        <option value={value} key={value}>
+                            {name}
+                        </option>
+                    ))}
+                </select>
+            </>
+        )
+    }
+
     return (
         <div className="flex flex-column w-40 f3">
-            <label htmlFor="type">Type:</label>
-            <select
-                className="mv2"
-                name="type"
+            <SelectForm
                 id="type"
+                label="Type:"
                 value={type}
-                onChange={(event) => {
-                    setType(event.target.value)
+                onChange={(value) => {
+                    setType(value)
                 }}
-            >
-                <option value="any">Any</option>
-                <option value="multiple">Multiple</option>
-                <option value="boolean">True/False</option>
-            </select>
-            <label htmlFor="difficulty">Difficulty:</label>
-            <select
-                className="mv2"
-                name="difficulty"
+                options={[
+                    ["any", "Any"],
+                    ["multiple", "Multiple"],
+                    ["boolean", "True/False"],
+                ]}
+            />
+            <SelectForm
                 id="difficulty"
+                label="Difficulty:"
                 value={difficulty}
-                onChange={(event) => {
-                    setDifficulty(event.target.value)
+                onChange={(value) => {
+                    setDifficulty(value)
                 }}
-            >
-                <option value="any">Any</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
-            <label htmlFor="category">Category:</label>
-            <select
-                className="mv2"
-                name="category"
+                options={[
+                    ["any", "Any"],
+                    ["easy", "Easy"],
+                    ["medium", "Medium"],
+                    ["hard", "Hard"],
+                ]}
+            />
+            <SelectForm
                 id="category"
+                label="Category:"
                 value={category}
-                onChange={(event) => {
-                    setCategory(event.target.value)
+                onChange={(value) => {
+                    setCategory(value)
                 }}
-            >
-                <option value="any">Any</option>
-                {categories.map((category) => (
-                    <option value={category.id} key={category.id}>
-                        {category.name}
-                    </option>
-                ))}
-            </select>
+                options={[["any", "Any"]].concat(
+                    categories.map((category) => [category.id, category.name])
+                )}
+            />
             <Button
                 name="Back"
                 onClick={() => {
