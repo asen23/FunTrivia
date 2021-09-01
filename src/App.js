@@ -99,6 +99,9 @@ function App() {
                         setIsPlaying(false)
                     }}
                     onAnswer={(point) => {
+                        if (score + point !== 0 && !hasOldScore) {
+                            setHasOldScore(true)
+                        }
                         if (score + point > highscore) {
                             setHighscore(score + point)
                             localStorage.setItem(
