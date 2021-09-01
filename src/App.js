@@ -72,6 +72,7 @@ function App() {
                     name="Play"
                     onClick={() => {
                         setIsPlaying(true)
+                        setScore(0)
                     }}
                 />
                 {Continue}
