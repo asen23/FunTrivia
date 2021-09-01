@@ -28,7 +28,6 @@ function Trivia(props) {
             .catch((error) => {
                 if (retry < 3) {
                     setRetry(retry + 1)
-                    getTrivia()
                 } else {
                     setIsError(true)
                 }
