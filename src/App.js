@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react"
 import Button from "./Components/Button"
 import Trivia from "./Components/Trivia"
+import Setting from "./Components/Setting"
 
 function App() {
     const [isPlaying, setIsPlaying] = useState(false)
+    const [isSetting, setIsSetting] = useState(false)
     const [highscore, setHighscore] = useState(0)
     const [score, setScore] = useState(0)
     const [hasOldScore, setHasOldScore] = useState(false)
+    const [setting, setSetting] = useState({
+        type: "multiple",
+        category: "any",
+        difficulty: "any",
+    })
 
     useEffect(() => {
         let lastHighscore = localStorage.getItem("highscore")
@@ -17,7 +24,32 @@ function App() {
         if (lastScore != null) {
             setHasOldScore(true)
         }
+        let lastSetting = sessionStorage.getItem("setting")
+        if (lastSetting != null) {
+            setSetting(JSON.parse(lastSetting))
+        }
     }, [])
+
+    const getURL = () => {
+        let type = ""
+        if (setting.type !== "any") {
+            type = "&type=" + encodeURIComponent(setting.type)
+        }
+        let category = ""
+        if (setting.category !== "any") {
+            category = "&category=" + encodeURIComponent(setting.category)
+        }
+        let difficulty = ""
+        if (setting.difficulty !== "any") {
+            difficulty = "&difficulty=" + encodeURIComponent(setting.difficulty)
+        }
+        return (
+            "https://opentdb.com/api.php?amount=1" +
+            type +
+            category +
+            difficulty
+        )
+    }
 
     const ButtonList = () => {
         let Continue = null
@@ -43,7 +75,12 @@ function App() {
                     }}
                 />
                 {Continue}
-                <Button name="Setting" onClick={() => {}} />
+                <Button
+                    name="Setting"
+                    onClick={() => {
+                        setIsSetting(true)
+                    }}
+                />
             </div>
         )
     }
@@ -57,6 +94,7 @@ function App() {
             <h1 className="f1">Fun Trivia</h1>
             {isPlaying ? (
                 <Trivia
+                    url={getURL()}
                     exit={() => {
                         setIsPlaying(false)
                     }}
@@ -71,6 +109,26 @@ function App() {
                         sessionStorage.setItem("lastscore", score + point)
                         setScore(score + point)
                     }}
+                />
+            ) : isSetting ? (
+                <Setting
+                    onBack={(type, difficulty, category) => {
+                        setIsSetting(false)
+                        setSetting({
+                            type: type,
+                            category: category,
+                            difficulty: difficulty,
+                        })
+                        localStorage.setItem(
+                            "setting",
+                            JSON.stringify({
+                                type: type,
+                                category: category,
+                                difficulty: difficulty,
+                            })
+                        )
+                    }}
+                    setting={setting}
                 />
             ) : (
                 <ButtonList />

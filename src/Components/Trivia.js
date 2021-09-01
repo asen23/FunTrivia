@@ -10,7 +10,7 @@ function Trivia(props) {
     const [isError, setIsError] = useState(false)
     const getTrivia = useCallback(() => {
         setIsLoading(true)
-        fetch("https://opentdb.com/api.php?amount=1&type=multiple", {
+        fetch(props.url, {
             mode: "cors",
         })
             .then((response) => {
@@ -32,7 +32,7 @@ function Trivia(props) {
                     setIsError(true)
                 }
             })
-    }, [retry])
+    }, [retry, props.url])
     useEffect(() => {
         getTrivia()
     }, [getTrivia])
