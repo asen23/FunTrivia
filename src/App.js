@@ -60,7 +60,7 @@ function App() {
                 <Button
                     name="Continue"
                     onClick={() => {
-                        history.push("/FunTrivia/trivia")
+                        history.push("/trivia")
                         setScore(parseInt(sessionStorage.getItem("lastscore")))
                     }}
                 />
@@ -72,7 +72,7 @@ function App() {
                 <Button
                     name="Play"
                     onClick={() => {
-                        history.push("/FunTrivia/trivia")
+                        history.push("/trivia")
                         setScore(0)
                     }}
                 />
@@ -80,7 +80,7 @@ function App() {
                 <Button
                     name="Setting"
                     onClick={() => {
-                        history.push("/FunTrivia/setting")
+                        history.push("/setting")
                     }}
                 />
             </div>
@@ -95,11 +95,11 @@ function App() {
             </div>
             <h1 className="f1">Fun Trivia</h1>
             <Switch>
-                <Route path="/FunTrivia/trivia">
+                <Route path="/trivia">
                     <Trivia
                         url={getURL()}
                         exit={() => {
-                            history.push("/FunTrivia/")
+                            history.push("/")
                         }}
                         onAnswer={(point) => {
                             if (score + point !== 0 && !hasOldScore) {
@@ -117,10 +117,10 @@ function App() {
                         }}
                     />
                 </Route>
-                <Route path="/FunTrivia/setting">
+                <Route path="/setting">
                     <Setting
                         onBack={(type, difficulty, category) => {
-                            history.push("/FunTrivia/")
+                            history.push("/")
                             setSetting({
                                 type: type,
                                 category: category,
@@ -138,7 +138,7 @@ function App() {
                         setting={setting}
                     />
                 </Route>
-                <Route path="/FunTrivia/">
+                <Route path="/">
                     <ButtonList />
                 </Route>
             </Switch>
