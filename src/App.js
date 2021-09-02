@@ -95,7 +95,7 @@ function App() {
             </div>
             <h1 className="f1">Fun Trivia</h1>
             <Switch>
-                <Route path="/trivia">
+                <Route path="/FunTrivia/trivia">
                     <Trivia
                         url={getURL()}
                         exit={() => {
@@ -117,7 +117,7 @@ function App() {
                         }}
                     />
                 </Route>
-                <Route path="/setting">
+                <Route path="/FunTrivia/setting">
                     <Setting
                         onBack={(type, difficulty, category) => {
                             history.push("/FunTrivia/")
@@ -138,7 +138,7 @@ function App() {
                         setting={setting}
                     />
                 </Route>
-                <Route path="/">
+                <Route path="/FunTrivia/">
                     <ButtonList />
                 </Route>
             </Switch>
