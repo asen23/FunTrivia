@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react"
+import { Switch, Route, useHistory } from "react-router-dom"
 import Button from "./Components/Button"
 import Trivia from "./Components/Trivia"
 import Setting from "./Components/Setting"
 
 function App() {
-    const [isPlaying, setIsPlaying] = useState(false)
-    const [isSetting, setIsSetting] = useState(false)
     const [highscore, setHighscore] = useState(0)
     const [score, setScore] = useState(0)
     const [hasOldScore, setHasOldScore] = useState(false)
@@ -14,6 +13,8 @@ function App() {
         category: "any",
         difficulty: "any",
     })
+
+    const history = useHistory()
 
     useEffect(() => {
         let lastHighscore = localStorage.getItem("highscore")
@@ -59,7 +60,7 @@ function App() {
                 <Button
                     name="Continue"
                     onClick={() => {
-                        setIsPlaying(true)
+                        history.push("/trivia")
                         setScore(parseInt(sessionStorage.getItem("lastscore")))
                     }}
                 />
@@ -71,7 +72,7 @@ function App() {
                 <Button
                     name="Play"
                     onClick={() => {
-                        setIsPlaying(true)
+                        history.push("/trivia")
                         setScore(0)
                     }}
                 />
@@ -79,7 +80,7 @@ function App() {
                 <Button
                     name="Setting"
                     onClick={() => {
-                        setIsSetting(true)
+                        history.push("/setting")
                     }}
                 />
             </div>
@@ -93,50 +94,54 @@ function App() {
                 <h2>Score: {score}</h2>
             </div>
             <h1 className="f1">Fun Trivia</h1>
-            {isPlaying ? (
-                <Trivia
-                    url={getURL()}
-                    exit={() => {
-                        setIsPlaying(false)
-                    }}
-                    onAnswer={(point) => {
-                        if (score + point !== 0 && !hasOldScore) {
-                            setHasOldScore(true)
-                        }
-                        if (score + point > highscore) {
-                            setHighscore(score + point)
-                            localStorage.setItem(
-                                "highscore",
-                                (score + point).toString()
-                            )
-                        }
-                        sessionStorage.setItem("lastscore", score + point)
-                        setScore(score + point)
-                    }}
-                />
-            ) : isSetting ? (
-                <Setting
-                    onBack={(type, difficulty, category) => {
-                        setIsSetting(false)
-                        setSetting({
-                            type: type,
-                            category: category,
-                            difficulty: difficulty,
-                        })
-                        localStorage.setItem(
-                            "setting",
-                            JSON.stringify({
+            <Switch>
+                <Route path="/trivia">
+                    <Trivia
+                        url={getURL()}
+                        exit={() => {
+                            history.push("/")
+                        }}
+                        onAnswer={(point) => {
+                            if (score + point !== 0 && !hasOldScore) {
+                                setHasOldScore(true)
+                            }
+                            if (score + point > highscore) {
+                                setHighscore(score + point)
+                                localStorage.setItem(
+                                    "highscore",
+                                    (score + point).toString()
+                                )
+                            }
+                            sessionStorage.setItem("lastscore", score + point)
+                            setScore(score + point)
+                        }}
+                    />
+                </Route>
+                <Route path="/setting">
+                    <Setting
+                        onBack={(type, difficulty, category) => {
+                            history.push("/")
+                            setSetting({
                                 type: type,
                                 category: category,
                                 difficulty: difficulty,
                             })
-                        )
-                    }}
-                    setting={setting}
-                />
-            ) : (
-                <ButtonList />
-            )}
+                            localStorage.setItem(
+                                "setting",
+                                JSON.stringify({
+                                    type: type,
+                                    category: category,
+                                    difficulty: difficulty,
+                                })
+                            )
+                        }}
+                        setting={setting}
+                    />
+                </Route>
+                <Route path="/">
+                    <ButtonList />
+                </Route>
+            </Switch>
         </div>
     )
 }
