@@ -60,7 +60,7 @@ function App() {
                 <Button
                     name="Continue"
                     onClick={() => {
-                        history.push("/trivia")
+                        history.push("/FunTrivia/trivia")
                         setScore(parseInt(sessionStorage.getItem("lastscore")))
                     }}
                 />
@@ -72,7 +72,7 @@ function App() {
                 <Button
                     name="Play"
                     onClick={() => {
-                        history.push("/trivia")
+                        history.push("/FunTrivia/trivia")
                         setScore(0)
                     }}
                 />
@@ -80,7 +80,7 @@ function App() {
                 <Button
                     name="Setting"
                     onClick={() => {
-                        history.push("/setting")
+                        history.push("/FunTrivia/setting")
                     }}
                 />
             </div>
@@ -99,7 +99,7 @@ function App() {
                     <Trivia
                         url={getURL()}
                         exit={() => {
-                            history.push("/")
+                            history.push("/FunTrivia/")
                         }}
                         onAnswer={(point) => {
                             if (score + point !== 0 && !hasOldScore) {
@@ -120,7 +120,7 @@ function App() {
                 <Route path="/setting">
                     <Setting
                         onBack={(type, difficulty, category) => {
-                            history.push("/")
+                            history.push("/FunTrivia/")
                             setSetting({
                                 type: type,
                                 category: category,
