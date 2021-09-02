@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/FunTrivia/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/FunTrivia/static/js/main.608dea51.chunk.js",
-    "main.js.map": "/FunTrivia/static/js/main.608dea51.chunk.js.map",
+    "main.js": "/FunTrivia/static/js/main.9b3827dd.chunk.js",
+    "main.js.map": "/FunTrivia/static/js/main.9b3827dd.chunk.js.map",
     "runtime-main.js": "/FunTrivia/static/js/runtime-main.fb7b5c53.js",
     "runtime-main.js.map": "/FunTrivia/static/js/runtime-main.fb7b5c53.js.map",
     "static/css/2.31461e4f.chunk.css": "/FunTrivia/static/css/2.31461e4f.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.31461e4f.chunk.css",
     "static/js/2.1a70bbdd.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.608dea51.chunk.js"
+    "static/js/main.9b3827dd.chunk.js"
   ]
 }
