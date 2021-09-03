@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/FunTrivia/*", "destination": "/*" }
+    { "source": "/FunTrivia/:asset*", "destination": "/:asset*" }
   ]
 }
