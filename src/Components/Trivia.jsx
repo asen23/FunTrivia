@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Button from "./Button"
 
-function Trivia(props) {
+export default function Trivia(props) {
     const [isLoading, setIsLoading] = useState(true)
     const [trivia, setTrivia] = useState({})
     const [answers, setAnswers] = useState([])
@@ -131,5 +131,3 @@ function Trivia(props) {
         )
     }
 }
-
-export default Trivia

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Switch, Route, useHistory } from "react-router-dom"
 import Button from "./Components/Button"
 import Trivia from "./Components/Trivia"
 import Setting from "./Components/Setting"
 
-function App() {
+export default function App() {
     const [highscore, setHighscore] = useState(0)
     const [score, setScore] = useState(0)
     const [hasOldScore, setHasOldScore] = useState(false)
@@ -145,5 +145,3 @@ function App() {
         </div>
     )
 }
-
-export default App

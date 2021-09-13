@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import Button from "./Button"
 
-const Setting = (props) => {
+export default function Setting(props) {
     const [categories, setCategories] = useState([])
     const [type, setType] = useState("any")
     const [difficulty, setDifficulty] = useState("any")
@@ -94,5 +94,3 @@ const Setting = (props) => {
         </div>
     )
 }
-
-export default Setting

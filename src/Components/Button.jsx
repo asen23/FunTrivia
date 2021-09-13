@@ -1,6 +1,4 @@
-import React from "react"
-
-function Button(props) {
+export default function Button(props) {
     return (
         <button
             className="bg-blue b--light-blue br3 f2 pa2 ma2 grow"
@@ -10,5 +8,3 @@ function Button(props) {
         </button>
     )
 }
-
-export default Button
