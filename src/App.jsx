@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Switch, Route, useHistory } from "react-router-dom"
 import Button from "./Components/Button"
 import Trivia from "./Components/Trivia"
