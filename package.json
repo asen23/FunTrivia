@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://asen23.github.io/FunTrivia",
   "dependencies": {
+    "@testing-library/dom": "^8.16.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.1",
