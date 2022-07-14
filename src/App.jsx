@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"
-import { Switch, Route, useHistory } from "react-router-dom"
-import Button from "./Components/Button"
-import Trivia from "./Components/Trivia"
-import Setting from "./Components/Setting"
+import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Button from "./Components/Button";
+import Setting from "./Components/Setting";
+import Trivia from "./Components/Trivia";
 
 export default function App() {
     const [highscore, setHighscore] = useState(0)
@@ -14,7 +14,7 @@ export default function App() {
         difficulty: "any",
     })
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     useEffect(() => {
         let lastHighscore = localStorage.getItem("highscore")
@@ -60,7 +60,7 @@ export default function App() {
                 <Button
                     name="Continue"
                     onClick={() => {
-                        history.push("/trivia")
+                        navigate("/trivia")
                         setScore(parseInt(sessionStorage.getItem("lastscore")))
                     }}
                 />
@@ -72,7 +72,7 @@ export default function App() {
                 <Button
                     name="Play"
                     onClick={() => {
-                        history.push("/trivia")
+                        navigate("/trivia")
                         setScore(0)
                     }}
                 />
@@ -80,7 +80,7 @@ export default function App() {
                 <Button
                     name="Setting"
                     onClick={() => {
-                        history.push("/setting")
+                        navigate("/setting")
                     }}
                 />
             </div>
@@ -94,12 +94,12 @@ export default function App() {
                 <h2>Score: {score}</h2>
             </div>
             <h1 className="f1">Fun Trivia</h1>
-            <Switch>
-                <Route path="/trivia">
+            <Routes>
+                <Route path="/trivia"  element={
                     <Trivia
                         url={getURL()}
                         exit={() => {
-                            history.push("/")
+                            navigate("/")
                         }}
                         onAnswer={(point) => {
                             if (score + point !== 0 && !hasOldScore) {
@@ -116,11 +116,11 @@ export default function App() {
                             setScore(score + point)
                         }}
                     />
-                </Route>
-                <Route path="/setting">
+                } />
+                <Route path="/setting" element={
                     <Setting
                         onBack={(type, difficulty, category) => {
-                            history.push("/")
+                            navigate("/")
                             setSetting({
                                 type: type,
                                 category: category,
@@ -137,11 +137,9 @@ export default function App() {
                         }}
                         setting={setting}
                     />
-                </Route>
-                <Route path="/">
-                    <ButtonList />
-                </Route>
-            </Switch>
+                } />
+                <Route path="/" element={<ButtonList />} />
+            </Routes>
         </div>
     )
 }
