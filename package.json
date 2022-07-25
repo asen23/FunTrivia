@@ -4,17 +4,19 @@
   "private": true,
   "homepage": "http://asen23.github.io/FunTrivia",
   "dependencies": {
-    "@testing-library/dom": "^8.16.0",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.1",
     "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "^5.0.1",
     "tachyons": "^4.12.0",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^8.16.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.2.1",
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
