@@ -3,7 +3,7 @@ A Fun Trivia Website
 Made with ReactJS
 
 # Additional Package Used
- - tachyons
- - react-cookie
+ - tailwindcss
+ - zustand
  - gh-pages
  - react-router-dom
