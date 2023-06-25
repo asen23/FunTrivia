@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { useTriviaStore } from "../store";
@@ -26,7 +26,7 @@ export const Trivia = () => {
   const navigate = useNavigate();
   const addScore = useTriviaStore((state) => state.addScore);
 
-  const getURL = useCallback(() => {
+  const url = useMemo(() => {
     let type = "";
     if (setting.type !== "any") {
       type = "&type=" + encodeURIComponent(setting.type);
@@ -46,7 +46,7 @@ export const Trivia = () => {
 
   const getTrivia = useCallback(async () => {
     setIsLoading(true);
-    const response = await fetch(getURL(), {
+    const response = await fetch(url, {
       mode: "cors",
     });
     if (response.status !== 200) {
@@ -66,7 +66,7 @@ export const Trivia = () => {
     allAnswer.sort(() => 0.5 - Math.random());
     setAnswers(allAnswer);
     setIsLoading(false);
-  }, [getURL]);
+  }, [url]);
 
   useEffect(() => {
     getTrivia();
@@ -94,7 +94,7 @@ export const Trivia = () => {
 
   const ButtonList = () => {
     return (
-      <>
+      <div className="flex gap-2">
         <Button
           name="Play Again"
           onClick={() => {
@@ -108,7 +108,7 @@ export const Trivia = () => {
             navigate("/");
           }}
         />
-      </>
+      </div>
     );
   };
 
@@ -150,12 +150,12 @@ export const Trivia = () => {
           </div>
         ) : isCorrect === true ? (
           <div>
-            <h1 className="text-green-400 text-4xl">Correct</h1>
+            <h1 className="text-success text-4xl">Correct</h1>
             <ButtonList />
           </div>
         ) : (
           <div>
-            <h1 className="text-red-600 text-4xl">Wrong</h1>
+            <h1 className="text-error text-4xl">Wrong</h1>
             <h2
               className="text-bold text-3xl"
               dangerouslySetInnerHTML={{

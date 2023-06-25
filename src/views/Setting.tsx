@@ -30,7 +30,7 @@ const SelectForm = ({
     <>
       <label htmlFor={id}>{label}</label>
       <select
-        className="my-2 p-1 rounded-md"
+        className="my-2 p-1 rounded-md select select-bordered"
         name={id}
         id={id}
         value={value}
