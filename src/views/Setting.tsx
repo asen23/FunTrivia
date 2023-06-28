@@ -1,6 +1,8 @@
+import { Button } from "@components";
+import type { CustomFlowbiteTheme } from "flowbite-react";
+import { Select } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
 import { useTriviaStore } from "../store";
 import {
   SettingDifficulty,
@@ -8,6 +10,17 @@ import {
   isSettingDifficulty,
   isSettingType,
 } from "../store/setting";
+
+const customTheme: CustomFlowbiteTheme["select"] = {
+  field: {
+    select: {
+      base: "text-ellipsis block w-full border disabled:cursor-not-allowed disabled:opacity-50",
+      colors: {
+        gray: "bg-base-200 border-gray-300 text-base-content focus:border-cyan-500 focus:ring-cyan-500",
+      },
+    },
+  },
+};
 
 type SelectFormType = {
   id: string;
@@ -28,9 +41,12 @@ const SelectForm = ({
 }: SelectFormType) => {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
-      <select
-        className="my-2 p-1 rounded-md select select-bordered"
+      <label htmlFor={id} className="label">
+        {label}
+      </label>
+      <Select
+        className="my-2"
+        theme={customTheme}
         name={id}
         id={id}
         value={value}
@@ -43,7 +59,7 @@ const SelectForm = ({
             {name}
           </option>
         ))}
-      </select>
+      </Select>
     </>
   );
 };
@@ -120,11 +136,12 @@ export const Setting = () => {
         )}
       />
       <Button
-        name="Back"
         onClick={() => {
           navigate("/");
         }}
-      />
+      >
+        Back
+      </Button>
     </div>
   );
 };

@@ -1,6 +1,7 @@
+import { Button, LoadingIcon } from "@components";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
+import sanitizeHtml from "sanitize-html";
 import { useTriviaStore } from "../store";
 
 type TriviaResponse = {
@@ -94,31 +95,28 @@ export const Trivia = () => {
 
   const ButtonList = () => {
     return (
-      <div className="flex gap-2">
+      <div className="flex gap-2 mt-4">
         <Button
-          name="Play Again"
           onClick={() => {
             setIsCorrect(undefined);
             getTrivia();
           }}
-        />
+        >
+          Play Again
+        </Button>
         <Button
-          name="Exit"
           onClick={() => {
             navigate("/");
           }}
-        />
+        >
+          Exit
+        </Button>
       </div>
     );
   };
 
   if (isLoading) {
-    return (
-      <img
-        src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif"
-        alt="loading"
-      />
-    );
+    return <LoadingIcon />;
   } else if (isError) {
     return (
       <div className="w-3/4">
@@ -133,19 +131,25 @@ export const Trivia = () => {
         <p className="m-1 text-xl">Difficulty: {trivia?.difficulty}</p>
         <p
           className="m-1 text-2xl mt-4"
-          dangerouslySetInnerHTML={{ __html: trivia?.question ?? "" }}
-        ></p>
+          dangerouslySetInnerHTML={{
+            __html: sanitizeHtml(trivia?.question ?? ""),
+          }}
+        />
         {isCorrect === undefined ? (
           <div className="flex flex-wrap gap-2 mt-4">
             {answers.map((answer) => (
-              <button
-                className="w-1/3 p-3 text-3xl bg-gray-500 rounded-xl grow"
+              <Button
+                className="w-1/3 p-3 rounded-xl grow"
                 onClick={() => checkAnswer(answer)}
                 key={answer}
-                dangerouslySetInnerHTML={{
-                  __html: answer,
-                }}
-              ></button>
+              >
+                <span
+                  className="text-3xl"
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtml(answer),
+                  }}
+                />
+              </Button>
             ))}
           </div>
         ) : isCorrect === true ? (
@@ -157,7 +161,7 @@ export const Trivia = () => {
           <div>
             <h1 className="text-error text-4xl">Wrong</h1>
             <h2
-              className="text-bold text-3xl"
+              className="text-bold text-3xl mt-2"
               dangerouslySetInnerHTML={{
                 __html: "The correct answer is " + trivia?.correct_answer,
               }}

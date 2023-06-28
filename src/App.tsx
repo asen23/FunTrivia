@@ -1,25 +1,27 @@
-import { Switch } from "@headlessui/react";
+import { ThemeToggle } from "@components";
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useTriviaStore } from "./store";
 import { Home } from "./views/Home";
 import { Setting } from "./views/Setting";
 import { Trivia } from "./views/Trivia";
+import { DARK_THEME, LIGHT_THEME } from "@config/theme";
 
 export const App = () => {
   const score = useTriviaStore((state) => state.score);
   const highscore = useTriviaStore((state) => state.highscore);
   const theme = useTriviaStore((state) => state.theme);
   const changeTheme = useTriviaStore((state) => state.changeTheme);
+  const checked = theme === DARK_THEME;
   useEffect(() => {
     if (theme === "default") {
       changeTheme(
         window.matchMedia?.("(prefers-color-scheme: dark)").matches
-          ? "night"
-          : "light"
+          ? DARK_THEME
+          : LIGHT_THEME
       );
     }
-    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.classList.value = theme;
   }, [theme, changeTheme]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-base-100 relative">
@@ -28,13 +30,12 @@ export const App = () => {
         <h2>Score: {score}</h2>
       </div>
       <div className="absolute top-0 right-0 px-4 text-xl">
-        <Switch
-          checked={theme === "night"}
-          onChange={(checked) => {
-            changeTheme(checked ? "night" : "light");
+        <ThemeToggle
+          checked={checked}
+          onCheckedChange={(checked) => {
+            changeTheme(checked ? DARK_THEME : LIGHT_THEME);
           }}
-          className="toggle"
-        ></Switch>
+        />
       </div>
       <h1 className="text-5xl font-bold mb-8">Fun Trivia</h1>
       <Routes>

@@ -1,11 +1,13 @@
-type ButtonProps = {
-  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  name: string;
-};
-export const Button = ({ onClick, name }: ButtonProps) => {
+import { Button as FlowbiteButton } from "flowbite-react";
+import { ComponentProps } from "react";
+import { twMerge } from "tailwind-merge";
+
+type ButtonProps = ComponentProps<typeof FlowbiteButton>;
+export const Button = ({ className, ...props }: ButtonProps) => {
   return (
-    <button className="btn" onClick={onClick}>
-      {name}
-    </button>
+    <FlowbiteButton
+      className={twMerge("bg-primary text-primary-content", className)}
+      {...props}
+    />
   );
 };

@@ -1,5 +1,5 @@
+import { Button } from "@components";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
 import { useTriviaStore } from "../store";
 
 export const Home = () => {
@@ -10,26 +10,29 @@ export const Home = () => {
   return (
     <div className="flex flex-col gap-2">
       <Button
-        name="Play"
         onClick={() => {
           navigate("/trivia");
           resetScore();
         }}
-      />
+      >
+        Play
+      </Button>
       {score !== 0 && (
         <Button
-          name="Continue"
           onClick={() => {
             navigate("/trivia");
           }}
-        />
+        >
+          Continue
+        </Button>
       )}
       <Button
-        name="Setting"
         onClick={() => {
           navigate("/setting");
         }}
-      />
+      >
+        Setting
+      </Button>
     </div>
   );
 };
