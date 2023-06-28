@@ -7,3 +7,5 @@ Made with ReactJS
  - zustand
  - gh-pages
  - react-router-dom
+ - flowbite
+ - radix-ui
